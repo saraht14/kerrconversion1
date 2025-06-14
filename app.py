@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load the correct mapping file
-product_mapping = pd.read_csv("Updated_Master_Product_Mapping_1.csv")
+product_mapping = pd.read_csv("Updated_Master_Product_Mapping_FULL.csv")
 
 # Streamlit input
 user_input = st.text_input("Enter a Manufacturer Product Number:")
