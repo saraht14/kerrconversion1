@@ -1,23 +1,21 @@
-
 import streamlit as st
 import pandas as pd
 
-# Load the product mapping CSV
-product_mapping = pd.read_csv('product_mapping.csv')
+# Load your mapping file
+product_mapping = pd.read_csv("your_mapping_file.csv")  # Replace with your actual file path
 
-# Streamlit app layout
-st.title("Kerr Product Number Finder")
+# Streamlit input
+user_input = st.text_input("Enter a Manufacturer Product Number:")
 
-# Text input for Manufacturer Product Number
-user_input = st.text_input("Enter Manufacturer Product Number:")
+# Check if input is valid before processing
+if user_input and isinstance(user_input, str):
+    cleaned_input = user_input.strip().upper()
+    result = product_mapping[product_mapping['Manufacturer_Product_Number'].str.strip().str.upper() == cleaned_input]
 
-# Search and display result
-if user_input:
-    result = product_mapping[product_mapping['Manufacturer_Product_Number'].str.strip().str.upper() == user_input.strip().upper()]
     if not result.empty:
-        st.write("### ✅ Match Found:")
+        st.success("✅ Match Found:")
         st.write(result)
     else:
         st.warning("No matching Kerr Product Number found.")
 else:
-    st.warning("Please enter a Manufacturer Product Number.")
+    st.info("Please enter a valid Manufacturer Product Number.")
